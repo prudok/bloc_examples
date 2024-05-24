@@ -12,7 +12,7 @@ class ValidationBLoC extends Bloc<ValidationEvent, ValidationState> {
   }) : super(initialState ?? const ValidationState.idle(data: null)) {
     on<ValidationEvent>(
       (event, emit) => event.map<Future<void>>(
-        updateInput: (value) => _validateEmail(value, emit),
+        updateInput: (value) => _validateInput(value, emit),
       ),
     );
   }
@@ -21,7 +21,7 @@ class ValidationBLoC extends Bloc<ValidationEvent, ValidationState> {
   final _passwordRegex = RegExp(r'^[a-zA-Z0-9]{6,}$');
 
   /// Событие валидации.
-  Future<void> _validateEmail(
+  Future<void> _validateInput(
     UpdateInputValidationEvent event,
     Emitter<ValidationState> emitter,
   ) async {
